@@ -1,0 +1,33 @@
+{
+  "name": "minesweeper_ai_v2",
+  "version": "1.0.0",
+  "description": "Minesweeper_AI project optimized",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build",
+    "deploy": "npm run build && gh-pages -d dist -b deploy-branch",
+    "preview": "vite preview",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maximilian2306/Minesweeper_AI_v2.git"
+  },
+  "keywords": [],
+  "author": "Maximilian Hahn",
+  "license": "GLP-3.0",
+  "bugs": {
+    "url": "https://github.com/Maximilian2306/Minesweeper_AI_v2/issues"
+  },
+  "homepage": "https://github.com/Maximilian2306/Minesweeper_AI_v2#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.31.0",
+    "eslint": "^9.31.0",
+    "gh-pages": "^6.3.0",
+    "globals": "^16.3.0",
+    "prettier": "^3.6.2",
+    "vite": "^7.0.4"
+  }
+}
