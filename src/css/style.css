@@ -281,7 +281,7 @@ h1 {
     border-radius: 4px;
 }
 
-.cell:hover:not(.revealed) {
+.cell:hover:not(.revealed):not(.flagged) {
     background: linear-gradient(145deg, #3a3a4e, #2a2a3e);
     transform: scale(1.05);
 }
@@ -304,7 +304,11 @@ h1 {
 }
 
 .cell.flagged {
-    background: linear-gradient(145deg, #e94560, #c93650);
+    /* background: linear-gradient(145deg, #e94560, #c93650); */
+    background-image: url('/assets/Pictures/CellRevFlag_v2.png');
+    /* background-image: url('/dist/assets/Pictures/Minesweeper_flag.png'); */
+    background-size: cover;
+    background-position: center;
 }
 
 .cell[data-number="1"] { color: #3498db; }

@@ -22,7 +22,7 @@ export class RandomAI {
 
     kiMenu.style.display = 'none';
     stopBtn.style.display = 'inline-block';
-    headerContainer.style.maxWidth = '460px';
+    // headerContainer.style.maxWidth = '460px';
 
     // Collect all unrevealed cells
     let unrevealedCells = [];

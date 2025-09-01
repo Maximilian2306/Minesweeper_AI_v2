@@ -34,7 +34,7 @@ export function stopAI(game) {
   console.log("Anzahl der Spiele: " + gameCount);
 
   closePopup('stopKI');
-  headerContainer.style.maxWidth = '360px';
+  // headerContainer.style.maxWidth = '360px';
   closePopup('kiMenu');
 }
 
