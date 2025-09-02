@@ -29,7 +29,7 @@ export class ArcadeManager {
 
     show() {
         document.body.style.overflow = 'hidden';
-        document.querySelector('.game-container').style.display = 'none';
+        // document.querySelector('.game-container').style.display = 'none';
         this.arcadeView.style.display = 'flex';
         this.arcadeMenu.style.display = 'flex';
         this.canvas.style.display = 'none';
