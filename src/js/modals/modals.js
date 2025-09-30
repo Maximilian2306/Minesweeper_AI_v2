@@ -40,8 +40,8 @@ export function bindModals({onSettingsOpen, onSettingsClose, onAboutOpen, onAbou
   msgBoxLoseBtn.addEventListener('click', () => {
     onStartGame?.();
     closePopup('game-over');
-    timerDisplay.textContent = '00:00';
-    restartBtn.textContent = '🙂 Neues Spiel';
+    // timerDisplay.textContent = '00:00';
+    // restartBtn.textContent = '🙂 Neues Spiel';
   });
 
   msgBoxWinBtn.addEventListener('click', () => {

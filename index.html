@@ -66,7 +66,7 @@
                 <div class="info-item">
                     <span id="timer">00:00</span>
                 </div>
-                <button id="mineIconButton" class="mine-icon-button" style="background: none; border: none; cursor: pointer;">
+                <button id="mineIconButton" class="mine-icon-button" style="background: none; cursor: pointer;">
                     <img id="mineIconImg" src="./assets/Pictures/Bomb1.jpeg" alt="Mine" style="width: 30px; height: 30px;">
                 </button>
                 <button id="restart-btn" class="restart-btn">🙂</button>
@@ -188,8 +188,19 @@
             </div>
         </div>
 
-        <div id="arcade-view" style="display: none;">
+        <!-- <div id="arcade-view" style="display: none;">
             <div id="arcade-menu">
+                <h2>🎮 Wähle ein Spiel</h2>
+                <button class="game-select" data-game="pong">🏓 Pong</button>
+                <button class="game-select" data-game="snake">🐍 Snake</button>
+                <button class="game-select" data-game="invaders">👾 Space Invaders</button>
+                <button id="exit-arcade" style="margin-top: 2rem">⬅ Zurück</button>
+            </div>
+            <canvas id="pong-canvas" width="800" height="500" style="display: none"></canvas>
+        </div> -->
+
+        <div id="arcade-view" class="popup">
+            <div id="arcade-menu" class="popup-content">
                 <h2>🎮 Wähle ein Spiel</h2>
                 <button class="game-select" data-game="pong">🏓 Pong</button>
                 <button class="game-select" data-game="snake">🐍 Snake</button>

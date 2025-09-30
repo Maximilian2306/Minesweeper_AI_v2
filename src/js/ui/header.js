@@ -51,7 +51,8 @@ export function bindHeaderControls({ onRestart, onModeChange }) {
       onModeChange({ size, mines });
       closePopup('mode-popup');
       timerDisplay.textContent = '00:00';
-      mineCounter.textContent = `Minen: ${mines}`;
+      // mineCounter.textContent = `Minen: ${mines}`;
+      mineCounter.textContent = `${mines}`;
     });
   });
 
@@ -67,7 +68,8 @@ export function bindHeaderControls({ onRestart, onModeChange }) {
       onModeChange({ size, mines });
       closePopup('custom-game-popup');
       timerDisplay.textContent = '00:00';
-      mineCounter.textContent = `Minen: ${mines}`;
+      // mineCounter.textContent = `Minen: ${mines}`;
+      mineCounter.textContent = `${mines}`;
     }
   });
 
@@ -97,12 +99,14 @@ export function bindHeaderControls({ onRestart, onModeChange }) {
     const kiMenuStyle = getComputedStyle(kiMenu);
 
     if (kiMenuStyle.display === 'none') {
+      kiButton.textContent = '🧠 KI deaktivieren';
       const rect = kiButton.getBoundingClientRect();
       kiMenu.style.left = `${rect.left}px`;
       kiMenu.style.top = `${rect.bottom + window.scrollY}px`;
       openPopup('kiMenu', 'block', false);
     } else {
       closePopup('kiMenu');
+      kiButton.textContent = '🧠 KI aktivieren';
     }
   });
 

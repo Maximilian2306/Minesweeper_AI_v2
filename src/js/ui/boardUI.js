@@ -49,8 +49,9 @@ export class BoardUI {
     }
     
     if (result.result === 'lose') {
-      const restartBtn = document.getElementById('restart-btn');
-      restartBtn.textContent = '😵 Neues Spiel';
+      // const restartBtn = document.getElementById('restart-btn');
+      // restartBtn.textContent = '😵 Neues Spiel';
+      // restartBtn.textContent = '😵';
       this.revealAllMinesUI();
       openPopup('game-over');
     }
