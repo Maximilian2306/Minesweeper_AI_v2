@@ -53,14 +53,14 @@ export class BoardUI {
       // restartBtn.textContent = '😵 Neues Spiel';
       // restartBtn.textContent = '😵';
       this.revealAllMinesUI();
-      openPopup('game-over');
+      openPopup('game-over', 'flex', true);
     }
 
     if (result.result === 'win') {
       this.revealAllMinesUI();
       const now = Date.now();
       const elapsedSeconds = Math.floor((now - this.game.startTime) / 1000);
-      openPopup('game-win');
+      openPopup('game-win', 'flex', true);
 
       try {
         this.leaderboard.saveWinToLeaderboard(elapsedSeconds);

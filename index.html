@@ -202,10 +202,14 @@
         <div id="arcade-view" class="popup">
             <div id="arcade-menu" class="popup-content">
                 <h2>🎮 Wähle ein Spiel</h2>
-                <button class="game-select" data-game="pong">🏓 Pong</button>
+                <!-- <button class="game-select" data-game="pong">🏓 Pong</button>
                 <button class="game-select" data-game="snake">🐍 Snake</button>
                 <button class="game-select" data-game="invaders">👾 Space Invaders</button>
-                <button id="exit-arcade" style="margin-top: 2rem">⬅ Zurück</button>
+                <button id="exit-arcade" style="margin-top: 2rem">⬅ Zurück</button> -->
+                <button class="control-btn" data-game="pong">🏓 Pong</button>
+                <button class="control-btn" data-game="snake">🐍 Snake</button>
+                <button class="control-btn" data-game="invaders">👾 Space Invaders</button>
+                <button id="exit-arcade" class="control-btn" style="margin-left: 2rem">⬅ Zurück</button> <!-- style="margin-top: 2rem" -->
             </div>
             <canvas id="pong-canvas" width="800" height="500" style="display: none"></canvas>
         </div>

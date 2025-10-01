@@ -22,7 +22,7 @@ export class Leaderboard {
   }
 
   async saveWinToLeaderboard(timeInSeconds) {
-    msgBoxWinNameInp.style.display = 'block'; // Zeige das Eingabefeld für den Namen
+    msgBoxWinNameInp.style.display = 'flex'; // Zeige das Eingabefeld für den Namen
 
     await new Promise((resolve) => {
       msgBoxWinNameInpBtn.onclick = () => {
