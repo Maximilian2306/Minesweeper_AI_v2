@@ -38,10 +38,7 @@ export class BoardUI {
     }
 
     const result = this.game.revealCell(x, y);
-    // this.updateBoard();
-    
-    // this.updateCell(x, y);
-    result.changed.forEach(({x, y}) => this.updateCell(x, y));
+    result.changed.forEach(({x: cellX, y: cellY}) => this.updateCell(cellX, cellY));
 
     if (result.result === 'ki') {
       this.revealAllMinesUI();
@@ -49,9 +46,6 @@ export class BoardUI {
     }
     
     if (result.result === 'lose') {
-      // const restartBtn = document.getElementById('restart-btn');
-      // restartBtn.textContent = '😵 Neues Spiel';
-      // restartBtn.textContent = '😵';
       this.revealAllMinesUI();
       openPopup('game-over', 'flex', true);
     }
@@ -76,7 +70,6 @@ export class BoardUI {
     }
 
     this.game.toggleFlag(x, y);
-    // this.updateBoard();
     this.updateCell(x, y);
   }
 
@@ -105,15 +98,9 @@ export class BoardUI {
 
     div.textContent = '';
 
-    // if (cell.revealed && cell.mine) {
-    //   div.textContent = '💣';
-    // } else 
     if (cell.revealed && cell.number > 0 && !cell.mine) {
       div.textContent = cell.number;
-    } 
-    // else if (cell.flagged && !cell.revealed) {
-    //   div.textContent = '🚩';
-    // }
+    }
   }
 
   revealAllMinesUI() {

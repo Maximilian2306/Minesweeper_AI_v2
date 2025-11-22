@@ -11,6 +11,7 @@ import { loadLanguage } from '../utils/lang.js';
 import { CrashSim } from '../utils/crashSim.js';
 import { ArcadeManager } from '../arcade/arcadeManager.js';
 import { refreshUI } from '../utils/refreshUI.js';
+import { initPopupHandlers } from '../utils/handlePopups.js';
 
 
 // Iitialize game and board UI
@@ -19,7 +20,7 @@ let boardUI;
 
 document.addEventListener('DOMContentLoaded', () => {
   const boardElement = document.getElementById('game-board');
-  const leaderboard = new Leaderboard('minesweeper-leaderboard');
+  const leaderboard = new Leaderboard();
 
   game = new MinesweeperGame(10, 10);
   boardUI = new BoardUI(game, boardElement, leaderboard);
@@ -31,6 +32,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const savedLang = localStorage.getItem('language') || 'de';
   loadLanguage(savedLang);
+
+  // Set initial mine icon with correct base path
+  const basePath = import.meta.env.BASE_URL || '/';
+  const mineIconImg = document.getElementById('mineIconImg');
+  if (mineIconImg) {
+    mineIconImg.src = `${basePath}assets/Pictures/Bomb1.jpeg`;
+  }
+
+  // Set CSS custom properties for dynamic asset paths
+  document.documentElement.style.setProperty('--bomb-image', `url('${basePath}assets/Pictures/Bomb1.jpeg')`);
+  document.documentElement.style.setProperty('--flag-image', `url('${basePath}assets/Pictures/CellRevFlag_v2.png')`);
 
   boardUI.renderBoard();
 
@@ -84,6 +96,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Start the crash simulation
   CrashSim.init();
+
+  // Initialize popup click-outside-to-close handlers
+  initPopupHandlers();
 
 });
 

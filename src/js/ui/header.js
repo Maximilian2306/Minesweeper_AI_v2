@@ -78,21 +78,20 @@ export function bindHeaderControls({ onRestart, onModeChange }) {
   });
 
   mineIconButton.addEventListener('click', () => {
+    const basePath = import.meta.env.BASE_URL || '/';
     const mineIcons = [
-      './assets/Pictures/Bomb1.jpeg',
-      './assets/Pictures/Bomb.jpg',
-      './assets/Pictures/Bomb2.jpg',
-      './assets/Pictures/Bomb3.webp',
+      `${basePath}assets/Pictures/Bomb1.jpeg`,
+      `${basePath}assets/Pictures/Bomb.jpg`,
+      `${basePath}assets/Pictures/Bomb2.jpg`,
+      `${basePath}assets/Pictures/Bomb3.webp`,
     ];
     currentMineIconIndex = (currentMineIconIndex + 1) % mineIcons.length;
 
     const mineIconImg = document.getElementById('mineIconImg');
     mineIconImg.src = mineIcons[currentMineIconIndex];
 
-    document.documentElement.style.setProperty(
-      '--mine-icon-url',
-      `url('.${mineIcons[currentMineIconIndex]}')`
-    );
+    // Update CSS variable so game board uses the same bomb icon
+    document.documentElement.style.setProperty('--bomb-image', `url('${mineIcons[currentMineIconIndex]}')`);
   });
 
   kiButton.addEventListener('click', () => {

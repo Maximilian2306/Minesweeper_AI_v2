@@ -51,10 +51,12 @@ export function bindModals({onSettingsOpen, onSettingsClose, onAboutOpen, onAbou
   });
 
   msgBoxLoseLBBtn.addEventListener('click', () => {
+    closePopup('game-over');
     openPopup('leaderboard-popup', 'flex', true);
   });
 
   msgBoxWinLBBtn.addEventListener('click', () => {
+    closePopup('game-win');
     openPopup('leaderboard-popup', 'flex', true);
   });
 }

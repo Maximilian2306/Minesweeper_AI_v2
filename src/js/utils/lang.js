@@ -2,7 +2,9 @@ let translations = {};
 let currentLang = 'de';
 
 export async function loadLanguage(lang) {
-  const res = await fetch(`./i18n/${lang}.json`);
+  // Use import.meta.env.BASE_URL for correct path in dev and production
+  const basePath = import.meta.env.BASE_URL || '/';
+  const res = await fetch(`${basePath}i18n/${lang}.json`);
   if (!res.ok) {
     console.error(`Language file not found: ${lang}`);
     return;

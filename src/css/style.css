@@ -38,6 +38,7 @@ body {
         "footer footer footer";
     gap: 20px;
     padding: 20px;
+    overflow-y: auto;
 }
 
 /* === Header Bereich === */
@@ -293,7 +294,10 @@ h1 {
 }
 
 .cell.mine {
-    background: var(--danger-color);
+    background-image: var(--bomb-image);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     animation: explode 0.5s ease;
 }
 
@@ -304,9 +308,8 @@ h1 {
 }
 
 .cell.flagged {
-    /* background: linear-gradient(145deg, #e94560, #c93650); */
-    background-image: url('/assets/Pictures/CellRevFlag_v2.png');
-    /* background-image: url('/dist/assets/Pictures/Minesweeper_flag.png'); */
+    background-color: var(--accent-color);
+    background-image: var(--flag-image);
     background-size: cover;
     background-position: center;
 }
@@ -468,6 +471,75 @@ h1 {
     max-width: 500px;
     width: 90%;
     animation: popupEnter 0.3s ease;
+}
+
+.popup-content h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.popup-content p {
+    margin-bottom: 15px;
+    text-align: center;
+    color: var(--text-dark);
+}
+
+.popup-content .control-btn {
+    margin-top: 10px;
+}
+
+.popup-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.popup-content form label {
+    color: var(--text-dark);
+}
+
+.popup-content form select,
+.popup-content form input {
+    padding: 10px;
+    background: var(--accent-color);
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+
+.popup-content .mode-btn {
+    margin-bottom: 10px;
+}
+
+/* === Arcade Menu Styling === */
+#arcade-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    min-width: 300px;
+}
+
+#arcade-menu h2 {
+    margin-bottom: 10px;
+}
+
+#arcade-menu .control-btn {
+    margin: 0;
+}
+
+#arcade-menu #exit-arcade {
+    margin-top: 10px;
+    margin-left: 0 !important;
+}
+
+#arcade-view canvas {
+    border-radius: var(--border-radius);
+    background: #000;
+}
+
+/* Hint text for ESC key */
+#arcade-view::after {
+    content: '';
 }
 
 @keyframes popupEnter {
