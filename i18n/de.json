@@ -4,10 +4,10 @@
   "Language": "Sprache",
   "German": "Deutsch",
   "English": "Englisch",
-  "AboutMe": "Über mich",
+  "AboutMe": "Über",
   "startGame": "Spiel starten",
   "Leaderboard": "Bestenliste",
-  "startArcade": "Arcade starten",
+  "startArcade": "Arcade",
   "Header": "Minesweeper-Spiel mit KI-Unterstützung",
   "startKI": "KI aktivieren",
   "ruleKI": "Regel-KI",
@@ -16,5 +16,9 @@
   "mineCount": "Minen: 10",
   "timer": "00:00",
   "newGame": "Neues Spiel",
-  "leaderboardTitle": "Bestenliste"
+  "leaderboardTitle": "Bestenliste",
+  "gameControl": "Spielsteuerung",
+  "aiControl": "KI-Steuerung",
+  "speed": "Geschwindigkeit:",
+  "kiIterations": "KI Iterationen"
 }

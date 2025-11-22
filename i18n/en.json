@@ -4,10 +4,10 @@
   "Language": "Language",
   "German": "German",
   "English": "English",
-  "AboutMe": "About Me",
+  "AboutMe": "About",
   "startGame": "Start Game",
   "Leaderboard": "Leaderboard",
-  "startArcade": "Start Arcade",
+  "startArcade": "Arcade",
   "Header": "Minesweeper Game with AI Support",
   "startKI": "Activate AI",
   "ruleKI": "Rule AI",
@@ -16,5 +16,9 @@
   "mineCount": "Mines: 10",
   "timer": "00:00",
   "newGame": "New Game",
-  "leaderboardTitle": "Leaderboard"
+  "leaderboardTitle": "Leaderboard",
+  "gameControl": "Game Control",
+  "aiControl": "AI Control",
+  "speed": "Speed:",
+  "kiIterations": "AI Iterations"
 }
