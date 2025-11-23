@@ -9,6 +9,10 @@ export function closePopup(id) {
         if (currentOpenPopup === id) {
             currentOpenPopup = null;
         }
+        // Reset overflow when closing arcade-view
+        if (id === 'arcade-view') {
+            document.body.style.overflow = 'auto';
+        }
     }
 }
 
@@ -37,11 +41,9 @@ export function initPopupHandlers() {
   document.addEventListener('click', (e) => {
     // Check if clicked element is a popup overlay (not the content)
     if (e.target.classList.contains('popup') && currentOpenPopup) {
-      // Special handling for arcade-view - only close if menu is showing
       if (currentOpenPopup === 'arcade-view') {
         const canvas = document.getElementById('pong-canvas');
         if (canvas && canvas.style.display !== 'none') {
-          // Game is running, don't close on outside click
           return;
         }
       }
@@ -50,7 +52,6 @@ export function initPopupHandlers() {
   });
 }
 
-// Get current open popup
 export function getCurrentPopup() {
   return currentOpenPopup;
 }

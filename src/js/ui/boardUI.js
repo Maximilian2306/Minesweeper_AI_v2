@@ -1,11 +1,28 @@
 import { openPopup } from '../utils/handlePopups.js';
-
+import { gameStats } from '../utils/statistics.js';
+import { formatTime } from '../utils/helpers.js';
 
 export class BoardUI {
   constructor(game, element, leaderboard) {
     this.game = game;
     this.element = element;
     this.leaderboard = leaderboard;
+    this.heatmap = null;
+    this.gameStartedAsAI = false; 
+  }
+
+  setHeatmap(heatmap) {
+    this.heatmap = heatmap;
+  }
+
+  updateStatsDisplay() {
+    const stats = gameStats.getStats();
+    document.getElementById('stat-games-played').textContent = stats.human.gamesPlayed;
+    document.getElementById('stat-win-rate').textContent = gameStats.getWinRate('human') + '%';
+    const avgTime = gameStats.getAverageTime('human');
+    document.getElementById('stat-avg-time').textContent = avgTime > 0 ? formatTime(avgTime) : '--';
+    const bestTime = stats.human.bestTime;
+    document.getElementById('stat-best-time').textContent = bestTime !== null ? formatTime(bestTime) : '--';
   }
 
   renderBoard() {
@@ -35,18 +52,28 @@ export class BoardUI {
   onLeftClick(x, y) {
     if (!this.game.startTime) {
       this.game.startTimer();
+      this.gameStartedAsAI = this.game.kiRunning;
+      gameStats.recordGameStart(this.gameStartedAsAI, this.game.boardSize, this.game.mineCount);
     }
 
     const result = this.game.revealCell(x, y);
     result.changed.forEach(({x: cellX, y: cellY}) => this.updateCell(cellX, cellY));
 
+    // Update heatmap after each move
+    if (this.heatmap) {
+      this.heatmap.update();
+    }
+
     if (result.result === 'ki') {
       this.revealAllMinesUI();
       this.updateBoard();
     }
-    
+
     if (result.result === 'lose') {
       this.revealAllMinesUI();
+      gameStats.recordGameEnd(this.gameStartedAsAI, false, 0, this.game.boardSize, this.game.mineCount);
+      this.updateStatsDisplay();
+      if (this.heatmap) this.heatmap.clear();
       openPopup('game-over', 'flex', true);
     }
 
@@ -54,6 +81,11 @@ export class BoardUI {
       this.revealAllMinesUI();
       const now = Date.now();
       const elapsedSeconds = Math.floor((now - this.game.startTime) / 1000);
+
+      gameStats.recordGameEnd(this.gameStartedAsAI, true, elapsedSeconds, this.game.boardSize, this.game.mineCount);
+      this.updateStatsDisplay();
+      if (this.heatmap) this.heatmap.clear();
+
       openPopup('game-win', 'flex', true);
 
       try {
@@ -67,10 +99,17 @@ export class BoardUI {
   onRightClick(x, y) {
     if (!this.game.startTime) {
       this.game.startTimer();
+      this.gameStartedAsAI = this.game.kiRunning;
+      gameStats.recordGameStart(this.gameStartedAsAI, this.game.boardSize, this.game.mineCount);
     }
 
     this.game.toggleFlag(x, y);
     this.updateCell(x, y);
+
+    // Update heatmap after flagging
+    if (this.heatmap) {
+      this.heatmap.update();
+    }
   }
 
   updateBoard() {

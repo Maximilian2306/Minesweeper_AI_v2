@@ -1,4 +1,3 @@
-
 // src/js/arcade/invaders.js
 export class InvadersGame {
     constructor(canvas) {
@@ -304,14 +303,24 @@ export class InvadersGame {
     }
 
     start() {
+        this.running = true;
         const loop = (time) => {
+            if (!this.running) return;
             const delta = (time - this.lastTime) / 1000;
             this.lastTime = time;
             this.update(delta);
             this.draw();
-            requestAnimationFrame(loop);
+            this.animationId = requestAnimationFrame(loop);
         };
-        requestAnimationFrame(loop);
+        this.animationId = requestAnimationFrame(loop);
+    }
+
+    stop() {
+        this.running = false;
+        if (this.animationId) {
+            cancelAnimationFrame(this.animationId);
+            this.animationId = null;
+        }
     }
 }
 

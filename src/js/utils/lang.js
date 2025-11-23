@@ -19,8 +19,25 @@ function t(key) {
 }
 
 function updateTexts() {
+  // Update text content
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
     el.textContent = t(key);
   });
+
+  // Update placeholders
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+    const key = el.getAttribute("data-i18n-placeholder");
+    el.placeholder = t(key);
+  });
+
+  // Update titles
+  document.querySelectorAll("[data-i18n-title]").forEach(el => {
+    const key = el.getAttribute("data-i18n-title");
+    el.title = t(key);
+  });
+}
+
+export function getTranslation(key) {
+  return t(key);
 }

@@ -1,5 +1,6 @@
 import { openPopup, closePopup } from '../utils/handlePopups.js';
 import { setAISpeed, resetGameCount } from '../ai/AIMenu.js';
+import { getTranslation } from '../utils/lang.js';
 
 export function bindHeaderControls({ onRestart, onModeChange }) {
   const restartBtn = document.getElementById('restart-btn');
@@ -51,7 +52,6 @@ export function bindHeaderControls({ onRestart, onModeChange }) {
       onModeChange({ size, mines });
       closePopup('mode-popup');
       timerDisplay.textContent = '00:00';
-      // mineCounter.textContent = `Minen: ${mines}`;
       mineCounter.textContent = `${mines}`;
     });
   });
@@ -60,17 +60,30 @@ export function bindHeaderControls({ onRestart, onModeChange }) {
     const size = parseInt(customSizeInput.value, 10);
     const mines = parseInt(customMinesInput.value, 10);
 
-    if (size > 0 && size < 101 && mines > 0 && size * size > mines) {
-      boardElement.style.gridTemplateColumns = `repeat(${size}, 30px)`;
-      boardElement.style.gridTemplateRows = `repeat(${size}, 30px)`;
-
-      resetGameCount();
-      onModeChange({ size, mines });
-      closePopup('custom-game-popup');
-      timerDisplay.textContent = '00:00';
-      // mineCounter.textContent = `Minen: ${mines}`;
-      mineCounter.textContent = `${mines}`;
+    // Validate inputs
+    if (isNaN(size) || size < 4 || size > 100) {
+      alert(getTranslation('invalidBoardSize') || 'Spielfeldgröße muss zwischen 4 und 100 liegen.');
+      return;
     }
+
+    if (isNaN(mines) || mines < 1 || mines > 1000) {
+      alert(getTranslation('invalidMineCount') || 'Minenanzahl muss zwischen 1 und 1000 liegen.');
+      return;
+    }
+
+    if (mines >= size * size) {
+      alert(getTranslation('tooManyMines') || 'Zu viele Minen für die Spielfeldgröße.');
+      return;
+    }
+
+    boardElement.style.gridTemplateColumns = `repeat(${size}, 30px)`;
+    boardElement.style.gridTemplateRows = `repeat(${size}, 30px)`;
+
+    resetGameCount();
+    onModeChange({ size, mines });
+    closePopup('custom-game-popup');
+    timerDisplay.textContent = '00:00';
+    mineCounter.textContent = `${mines}`;
   });
 
   customCloseBtn.addEventListener('click', () => {
@@ -90,22 +103,26 @@ export function bindHeaderControls({ onRestart, onModeChange }) {
     const mineIconImg = document.getElementById('mineIconImg');
     mineIconImg.src = mineIcons[currentMineIconIndex];
 
-    // Update CSS variable so game board uses the same bomb icon
     document.documentElement.style.setProperty('--bomb-image', `url('${mineIcons[currentMineIconIndex]}')`);
   });
 
   kiButton.addEventListener('click', () => {
     const kiMenuStyle = getComputedStyle(kiMenu);
+    const kiButtonSpan = kiButton.querySelector('span');
 
     if (kiMenuStyle.display === 'none') {
-      kiButton.textContent = '🧠 KI deaktivieren';
+      if (kiButtonSpan) {
+        kiButtonSpan.textContent = getTranslation('stopKILabel');
+      }
       const rect = kiButton.getBoundingClientRect();
       kiMenu.style.left = `${rect.left}px`;
       kiMenu.style.top = `${rect.bottom + window.scrollY}px`;
       openPopup('kiMenu', 'block', false);
     } else {
       closePopup('kiMenu');
-      kiButton.textContent = '🧠 KI aktivieren';
+      if (kiButtonSpan) {
+        kiButtonSpan.textContent = getTranslation('startKI');
+      }
     }
   });
 

@@ -1,4 +1,3 @@
-
 // src/js/arcade/snake.js
 export class SnakeGame {
     constructor(canvas) {

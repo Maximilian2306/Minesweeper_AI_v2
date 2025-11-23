@@ -1,4 +1,3 @@
-
 // src/js/arcade/pong.js
 export class PongGame {
     constructor(canvas) {

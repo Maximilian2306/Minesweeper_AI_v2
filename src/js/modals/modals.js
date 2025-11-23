@@ -13,7 +13,6 @@ export function bindModals({onSettingsOpen, onSettingsClose, onAboutOpen, onAbou
   const msgBoxLoseLBBtn = document.getElementById('game-over-leaderboard-btn');
   const msgBoxWinLBBtn = document.getElementById('game-win-leaderboard-btn');
 
-  const restartBtn = document.getElementById('restart-btn');
   const timerDisplay = document.getElementById('timer');
 
   // Bind event listeners for modals
@@ -40,8 +39,6 @@ export function bindModals({onSettingsOpen, onSettingsClose, onAboutOpen, onAbou
   msgBoxLoseBtn.addEventListener('click', () => {
     onStartGame?.();
     closePopup('game-over');
-    // timerDisplay.textContent = '00:00';
-    // restartBtn.textContent = '🙂 Neues Spiel';
   });
 
   msgBoxWinBtn.addEventListener('click', () => {
