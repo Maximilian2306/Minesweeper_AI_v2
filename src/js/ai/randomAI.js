@@ -2,8 +2,7 @@ import { sleep } from '../utils/helpers.js';
 import { aiSpeed, incrementGameCount } from './AIMenu.js';
 
 // KI Buttons //
-const stopBtn = document.getElementById('stopKI'); 
-const headerContainer = document.getElementById('header-container');
+const stopBtn = document.getElementById('stopKI');
 const kiMenu = document.getElementById('kiMenu');
 
 
@@ -22,7 +21,6 @@ export class RandomAI {
 
     kiMenu.style.display = 'none';
     stopBtn.style.display = 'inline-block';
-    // headerContainer.style.maxWidth = '460px';
 
     // Collect all unrevealed cells
     let unrevealedCells = [];
@@ -49,9 +47,6 @@ export class RandomAI {
     while (this.game.kiRunning && i < unrevealedCells.length) {
       if (aiSpeed > 0) {
         await sleep(aiSpeed); 
-        console.log("Gemessen mit Await: " + aiSpeed);
-      } else {
-        console.log("Gemessen ohne Await: " + aiSpeed);
       }
 
       if (this.game.gameOver) {

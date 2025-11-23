@@ -3,7 +3,6 @@ import { closePopup } from '../utils/handlePopups.js';
 const stopBtn = document.getElementById('stopKI');
 const randomKIBtn = document.getElementById('startRandomKI');
 const ruleBasedKIBtn = document.getElementById('startRuleKI');
-const headerContainer = document.getElementById('header-container');
 const gameIterationsLabel = document.getElementById('gameIterations');
 
 export let aiSpeed = 0.1;
