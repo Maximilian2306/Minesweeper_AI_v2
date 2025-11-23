@@ -3,7 +3,6 @@ import { aiSpeed, incrementGameCount } from './AIMenu.js';
 
 // KI Buttons //
 const stopBtn = document.getElementById('stopKI');
-const headerContainer = document.getElementById('header-container');
 const kiMenu = document.getElementById('kiMenu');
 
 
@@ -21,16 +20,12 @@ export class RuleBasedAI {
 
     kiMenu.style.display = 'none';
     stopBtn.style.display = 'inline-block';
-    // headerContainer.style.maxWidth = '460px';
     this.game.kiRunning = true;
 
     while (this.game.kiRunning) {
 
       if(aiSpeed > 0) {
-        await sleep(aiSpeed); 
-        console.log("Gemessen mit Await: " + aiSpeed);
-      } else {
-        console.log("Gemessen ohne Await: " + aiSpeed);
+        await sleep(aiSpeed);
       }
 
       if (this.game.gameOver) {
@@ -74,7 +69,6 @@ export class RuleBasedAI {
           } else {
             this.game.kiRunning = false;
             stopBtn.style.display = 'none';
-            headerContainer.style.maxWidth = '360px';
             break;
           }
         }
@@ -111,11 +105,10 @@ export class RuleBasedAI {
         if (hidden.length > 0 && hidden.length === cell.number - flagged) {
           for (const n of hidden) {
             if (!n.flagged) {
-              // this.boardUI.onLeftClick(n.x, n.y);
-              this.boardUI.onRightClick(n.x, n.y); // wenn BoardUI das unterstützt
+              this.boardUI.onRightClick(n.x, n.y);
               changed = true;
               if (aiSpeed > 0) {
-                await sleep(aiSpeed); 
+                await sleep(aiSpeed);
               }
             }
           }

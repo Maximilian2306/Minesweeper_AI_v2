@@ -1,6 +1,7 @@
 import { PongGame } from './pong.js';
 import { SnakeGame } from './snake.js';
 import { InvadersGame } from './invaders.js';
+import { openPopup, closePopup } from '../utils/handlePopups.js';
 
 export class ArcadeManager {
     constructor() {
@@ -9,6 +10,7 @@ export class ArcadeManager {
         this.canvas = document.getElementById('pong-canvas');
         this.exitButton = document.getElementById('exit-arcade');
         this.currentGame = null;
+        this.escHandler = null;
 
         this.bindEvents();
         this.setupCanvas();
@@ -20,7 +22,7 @@ export class ArcadeManager {
     }
 
     bindEvents() {
-        document.querySelectorAll('.game-select').forEach(button => {
+        document.querySelectorAll('#arcade-menu [data-game]').forEach(button => {
             button.addEventListener('click', () => this.startGame(button.dataset.game));
         });
 
@@ -29,8 +31,7 @@ export class ArcadeManager {
 
     show() {
         document.body.style.overflow = 'hidden';
-        // document.querySelector('.game-container').style.display = 'none';
-        this.arcadeView.style.display = 'flex';
+        openPopup('arcade-view', 'flex', true);
         this.arcadeMenu.style.display = 'flex';
         this.canvas.style.display = 'none';
     }
@@ -54,6 +55,27 @@ export class ArcadeManager {
         if (this.currentGame) {
             this.currentGame.start();
         }
+
+        // ESC key listener to exit game
+        this.escHandler = (e) => {
+            if (e.key === 'Escape') {
+                this.exitGame();
+            }
+        };
+        document.addEventListener('keydown', this.escHandler);
+    }
+
+    exitGame() {
+        if (this.currentGame) {
+            this.currentGame.stop();
+            this.currentGame = null;
+        }
+        if (this.escHandler) {
+            document.removeEventListener('keydown', this.escHandler);
+            this.escHandler = null;
+        }
+        this.canvas.style.display = 'none';
+        this.arcadeMenu.style.display = 'flex';
     }
 
     exit() {
@@ -61,8 +83,11 @@ export class ArcadeManager {
             this.currentGame.stop();
             this.currentGame = null;
         }
-        this.arcadeView.style.display = 'none';
-        document.querySelector('.game-container').style.display = 'grid';
+        if (this.escHandler) {
+            document.removeEventListener('keydown', this.escHandler);
+            this.escHandler = null;
+        }
+        closePopup('arcade-view');
         document.body.style.overflow = 'auto';
         this.canvas.style.display = 'none';
         this.arcadeMenu.style.display = 'flex';

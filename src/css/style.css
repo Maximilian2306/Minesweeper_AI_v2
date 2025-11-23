@@ -323,6 +323,140 @@ h1 {
 .cell[data-number="7"] { color: #34495e; }
 .cell[data-number="8"] { color: #95a5a6; }
 
+/* === Heatmap Overlay === */
+.cell.heatmap-active {
+    position: relative;
+}
+
+.cell.heatmap-active::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--heatmap-color, transparent);
+    pointer-events: none;
+    border-radius: 2px;
+}
+
+/* === Statistics Panel === */
+.stats-section {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.stats-section h4 {
+    color: var(--highlight-color);
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.reset-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 4px;
+    opacity: 0.7;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.reset-btn:hover {
+    opacity: 1;
+    transform: rotate(180deg);
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    font-size: 0.85rem;
+    color: var(--text-dark);
+}
+
+.stat-item .stat-value {
+    font-weight: bold;
+    color: var(--text-light);
+}
+
+.stat-item.highlight .stat-value {
+    color: var(--warning-color);
+}
+
+.heatmap-toggle {
+    display: flex;
+    align-items: center;
+}
+
+.heatmap-toggle input[type="checkbox"] {
+    display: none;
+}
+
+.heatmap-toggle .switch-slider {
+    position: relative;
+    width: 50px;
+    height: 26px;
+    background: var(--button-bg);
+    border-radius: 13px;
+    cursor: pointer;
+    transition: background 0.3s, border-color 0.3s;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.heatmap-toggle .switch-slider::after {
+    content: '';
+    position: absolute;
+    top: 1.5px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background: var(--text-light);
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.heatmap-toggle input[type="checkbox"]:checked + .switch-slider {
+    background: var(--highlight-color);
+}
+
+.heatmap-toggle input[type="checkbox"]:checked + .switch-slider::after {
+    transform: translateX(24px);
+}
+
+.heatmap-legend {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.75rem;
+    margin-top: 12px;
+}
+
+.heatmap-legend-gradient {
+    width: 100%;
+    height: 12px;
+    background: linear-gradient(to right, hsl(120, 70%, 50%), hsl(60, 70%, 50%), hsl(0, 70%, 50%));
+    border-radius: 4px;
+}
+
+.heatmap-legend-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 0.7rem;
+    color: var(--text-dark);
+    margin-top: 4px;
+}
+
 /* === Stats Panel (Rechte Seite) === */
 .stats-panel {
     grid-area: stats;
