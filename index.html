@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Minesweeper-AI</title>
-    <script type="module" crossorigin src="/Minesweeper_AI_v2/assets/index-BlLJmhSW.js"></script>
-    <link rel="stylesheet" crossorigin href="/Minesweeper_AI_v2/assets/index-CA3A2QVl.css">
+    <script type="module" crossorigin src="/Minesweeper_AI_v2/assets/index-HiByv36o.js"></script>
+    <link rel="stylesheet" crossorigin href="/Minesweeper_AI_v2/assets/index-BMM3Z_AS.css">
   </head>
     <body>
         <!-- Header -->
@@ -15,13 +15,13 @@
                 <h1>Minesweeper-AI</h1>
             </div>
             <div class="nav-buttons">
-                <button id="arcade-btn" class="nav-btn">
+                <button id="arcade-btn" class="nav-btn" aria-label="Open Arcade">
                     🎮 <span data-i18n="startArcade">Arcade</span>
                 </button>
-                <button id="settings-btn" class="nav-btn">
+                <button id="settings-btn" class="nav-btn" aria-label="Open Settings">
                     ⚙️ <span data-i18n="Settings">Einstellungen</span>
                 </button>
-                <button id="about-btn" class="nav-btn">
+                <button id="about-btn" class="nav-btn" aria-label="About">
                     <img src="./assets/Pictures/aboutIcon2.png" alt="About" class="icon">
                     <span data-i18n="AboutMe">Über</span>
                 </button>
@@ -32,26 +32,26 @@
         <aside class="sidebar">
             <div class="control-section">
                 <h3>🎯 <span data-i18n="gameControl">Spielsteuerung</span></h3>
-                <button id="start-btn" class="control-btn">▶️ <span data-i18n="startGame">Spiel starten</span></button>
-                <button id="open-leaderboard-btn" class="control-btn">🏆 <span data-i18n="Leaderboard">Bestenliste</span></button>
+                <button id="start-btn" class="control-btn" aria-label="Start Game">▶️ <span data-i18n="startGame">Spiel starten</span></button>
+                <button id="open-leaderboard-btn" class="control-btn" aria-label="Open Leaderboard">🏆 <span data-i18n="Leaderboard">Bestenliste</span></button>
             </div>
 
             <div class="control-section">
                 <h3>🤖 <span data-i18n="aiControl">KI-Steuerung</span></h3>
-                <button id="kiActBtn" class="control-btn">🧠 <span data-i18n="startKI">KI aktivieren</span></button>
+                <button id="kiActBtn" class="control-btn" aria-label="Activate AI">🧠 <span data-i18n="startKI">KI aktivieren</span></button>
 
                 <div id="kiMenu" class="ki-controls">
-                    <button id="startRuleKI" class="control-btn">🧠 <span data-i18n="ruleKI">Regel-KI</span></button>
-                    <button id="startRandomKI" class="control-btn">🎲 <span data-i18n="randomKI">Zufalls-KI</span></button>
+                    <button id="startRuleKI" class="control-btn" aria-label="Start Rule AI">🧠 <span data-i18n="ruleKI">Regel-KI</span></button>
+                    <button id="startRandomKI" class="control-btn" aria-label="Start Random AI">🎲 <span data-i18n="randomKI">Zufalls-KI</span></button>
 
                     <div class="speed-control">
                         <label for="kiSpeed" data-i18n="speed">Geschwindigkeit:</label>
-                        <input type="range" id="kiSpeed" min="0" max="100" step="0.05" value="0.1">
+                        <input type="range" id="kiSpeed" min="0" max="100" step="0.05" value="0.1" aria-label="AI Speed">
                         <span id="kiSpeedValue">0.10s</span>
                     </div>
                 </div>
 
-                <button id="stopKI" class="control-btn" style="display: none; background: var(--danger-color);">
+                <button id="stopKI" class="control-btn" style="display: none; background: var(--danger-color);" aria-label="Stop AI">
                     🛑 <span data-i18n="stopKI">KI stoppen</span>
                 </button>
             </div>
@@ -61,19 +61,19 @@
         <main class="main-content">
             <div class="game-info">
                 <div class="info-item">
-                    💣 Minen: <span id="mine-count">10</span>
+                    💣 <span data-i18n="mineCount">Minen:</span> <span id="mine-count">10</span>
                 </div>
                 <div class="info-item">
                     <span id="timer">00:00</span>
                 </div>
-                <button id="mineIconButton" class="mine-icon-button" style="background: none; border: none; cursor: pointer;">
+                <button id="mineIconButton" class="mine-icon-button" style="background: none; border: none; cursor: pointer;" aria-label="Change Mine Icon">
                     <img id="mineIconImg" src="/Minesweeper_AI_v2/assets/Pictures/Bomb1.jpeg" alt="Mine" style="width: 30px; height: 30px; border-radius: 4px;">
                 </button>
-                <button id="restart-btn" class="restart-btn">🙂</button>
+                <button id="restart-btn" class="restart-btn" aria-label="Restart Game">🙂</button>
             </div>
 
             <div class="game-board-container">
-                <div id="game-board" class="game-board">
+                <div id="game-board" class="game-board" role="grid" aria-label="Minesweeper Game Board">
                     <!-- Spielfeld wird hier generiert -->
                 </div>
             </div>
@@ -84,6 +84,48 @@
             <div class="iteration-counter">
                 <h3 data-i18n="kiIterations">KI Iterationen</h3>
                 <div id="gameIterations">0</div>
+            </div>
+
+            <!-- Statistics Section -->
+            <div class="stats-section">
+                <div class="section-header">
+                    <h4>📊 <span data-i18n="statistics">Statistiken</span></h4>
+                    <button id="reset-stats-btn" class="reset-btn" aria-label="Reset Statistics" title="Reset">🔄</button>
+                </div>
+                <div class="stat-item">
+                    <span data-i18n="gamesPlayed">Spiele gespielt</span>
+                    <span class="stat-value" id="stat-games-played">0</span>
+                </div>
+                <div class="stat-item highlight">
+                    <span data-i18n="winRate">Gewinnrate</span>
+                    <span class="stat-value" id="stat-win-rate">0%</span>
+                </div>
+                <div class="stat-item">
+                    <span data-i18n="avgTime">Ø Zeit</span>
+                    <span class="stat-value" id="stat-avg-time">--</span>
+                </div>
+                <div class="stat-item">
+                    <span data-i18n="bestTime">Beste Zeit</span>
+                    <span class="stat-value" id="stat-best-time">--</span>
+                </div>
+            </div>
+
+            <!-- Heatmap Toggle -->
+            <div class="stats-section">
+                <div class="section-header">
+                    <h4>🗺️ <span data-i18n="heatmap">Heatmap</span></h4>
+                    <div class="heatmap-toggle">
+                        <input type="checkbox" id="heatmap-toggle" aria-label="Toggle Heatmap">
+                        <label for="heatmap-toggle" class="switch-slider"></label>
+                    </div>
+                </div>
+                <div class="heatmap-legend">
+                    <div class="heatmap-legend-gradient"></div>
+                </div>
+                <div class="heatmap-legend-labels">
+                    <span data-i18n="safe">Sicher</span>
+                    <span data-i18n="danger">Gefahr</span>
+                </div>
             </div>
 
             <div class="leaderboard">
@@ -100,116 +142,101 @@
         </footer>
 
         <!-- Easter Egg Button -->
-        <button id="prank-btn" class="warn-btn" title="AUF GAR KEINEN FALL DRÜCKEN!!!">🚫</button>
+        <button id="prank-btn" class="warn-btn" data-i18n-title="dontPress" title="AUF GAR KEINEN FALL DRÜCKEN!!!" aria-label="Easter Egg">🚫</button>
 
-        <!-- Popups (alle vorhandenen Popups hier einfügen) -->
-        <div id="settings-popup" class="popup">
+        <!-- Popups -->
+        <div id="settings-popup" class="popup" role="dialog" aria-labelledby="settings-title">
             <div class="popup-content">
-                <h2>⚙️ Einstellungen</h2>
+                <h2 id="settings-title">⚙️ <span data-i18n="Settings">Einstellungen</span></h2>
                 <form id="settings-form">
-                    <label for="language">Sprache:</label>
-                    <select id="language" name="language">
-                        <option value="de">Deutsch</option>
-                        <option value="en">English</option>
+                    <label for="language" data-i18n="Language">Sprache:</label>
+                    <select id="language" name="language" aria-label="Select Language">
+                        <option value="de" data-i18n="German">Deutsch</option>
+                        <option value="en" data-i18n="English">English</option>
                     </select>
-                    <button id="save-settings-btn" type="submit" class="control-btn">Speichern</button>
+                    <button id="save-settings-btn" type="submit" class="control-btn" data-i18n="saveSettings">Speichern</button>
                 </form>
             </div>
         </div>
 
-        <div id="about-popup" class="popup">
+        <div id="about-popup" class="popup" role="dialog" aria-labelledby="about-title">
             <div class="popup-content">
-                <h2>Über Minesweeper-AI</h2>
-                <p>Ein klassisches Minesweeper-Spiel mit integrierter KI-Unterstützung.</p>
-                <button id="close-about-btn" class="control-btn">Schließen</button>
+                <h2 id="about-title" data-i18n="aboutTitle">Über Minesweeper-AI</h2>
+                <p data-i18n="aboutText">Ein klassisches Minesweeper-Spiel mit integrierter KI-Unterstützung.</p>
+                <button id="close-about-btn" class="control-btn" data-i18n="close">Schließen</button>
             </div>
         </div>
 
-        <div id="mode-popup" class="popup">
+        <div id="mode-popup" class="popup" role="dialog" aria-labelledby="mode-title">
             <div class="popup-content">
-                <h2>🎮 Spielmodus wählen</h2>
-                <button class="control-btn mode-btn" data-size="4" data-mines="1">Anfänger (4x4, 1 Mine)</button>
-                <button class="control-btn mode-btn" data-size="10" data-mines="10">Mittelmäßig (10x10, 10 Minen)</button>
-                <button class="control-btn mode-btn" data-size="14" data-mines="30">Fortgeschritten (14x14, 30 Minen)</button>
-                <button class="control-btn mode-btn" data-size="18" data-mines="50">Profi (18x18, 50 Minen)</button>
-                <button class="control-btn mode-btn">Custom</button>
+                <h2 id="mode-title">🎮 <span data-i18n="selectMode">Spielmodus wählen</span></h2>
+                <button class="control-btn mode-btn" data-size="4" data-mines="1"><span data-i18n="beginner">Anfänger</span> (4x4, 1 Mine)</button>
+                <button class="control-btn mode-btn" data-size="10" data-mines="10"><span data-i18n="intermediate">Mittelmäßig</span> (10x10, 10 Minen)</button>
+                <button class="control-btn mode-btn" data-size="14" data-mines="30"><span data-i18n="advanced">Fortgeschritten</span> (14x14, 30 Minen)</button>
+                <button class="control-btn mode-btn" data-size="18" data-mines="50"><span data-i18n="expert">Profi</span> (18x18, 50 Minen)</button>
+                <button class="control-btn mode-btn" data-i18n="custom">Custom</button>
             </div>
         </div>
 
-        <div id="custom-game-popup" class="popup">
+        <div id="custom-game-popup" class="popup" role="dialog" aria-labelledby="custom-game-title">
             <div class="popup-content">
-                <h2>🔧 Benutzerdefiniertes Spiel</h2>
+                <h2 id="custom-game-title">🔧 <span data-i18n="customGame">Benutzerdefiniertes Spiel</span></h2>
                 <form id="custom-game-form">
-                    <label for="custom-size">Spielfeldgröße (4-100):</label>
-                    <input type="number" id="custom-size" min="4" max="100" required>
-                    <label for="custom-mines">Anzahl der Minen (1-1000):</label>
-                    <input type="number" id="custom-mines" min="1" max="1000" required>
-                    <button type="button" class="control-btn" id="start-custom-game-btn">Starten</button>
-                    <button type="button" class="control-btn" id="cancel-custom-game-btn">Abbrechen</button>
+                    <label for="custom-size" data-i18n="boardSize">Spielfeldgröße (4-100):</label>
+                    <input type="number" id="custom-size" min="4" max="100" required aria-label="Board Size">
+                    <label for="custom-mines" data-i18n="mineAmount">Anzahl der Minen (1-1000):</label>
+                    <input type="number" id="custom-mines" min="1" max="1000" required aria-label="Number of Mines">
+                    <button type="button" class="control-btn" id="start-custom-game-btn" data-i18n="start">Starten</button>
+                    <button type="button" class="control-btn" id="cancel-custom-game-btn" data-i18n="cancel">Abbrechen</button>
                 </form>
             </div>
         </div>
 
-        <div id="leaderboard-popup" class="popup">
+        <div id="leaderboard-popup" class="popup" role="dialog" aria-labelledby="leaderboard-title">
             <div class="popup-content">
-                <h2>🏆 Bestenliste</h2>
+                <h2 id="leaderboard-title">🏆 <span data-i18n="Leaderboard">Bestenliste</span></h2>
                 <ul id="leaderboard-list-popup" class="leaderboard-list">
                     <!-- Dynamisch gefüllt -->
                 </ul>
-                <button id="clear-leaderboard-btn" class="control-btn">Leaderboard leeren</button>
-                <button id="close-leaderboard-btn" class="control-btn">Schließen</button>
+                <button id="clear-leaderboard-btn" class="control-btn" data-i18n="clearLeaderboard">Leaderboard leeren</button>
+                <button id="close-leaderboard-btn" class="control-btn" data-i18n="close">Schließen</button>
             </div>
         </div>
 
-        <div id="game-over" class="popup">
+        <div id="game-over" class="popup" role="dialog" aria-labelledby="game-over-title">
             <div class="popup-content" style="text-align: center;">
-                <h2 style="color: var(--danger-color);">💥 Game Over!</h2>
-                <p>Du bist auf eine Mine getreten.</p>
-                <button id="game-over-btn" class="control-btn">Neu starten</button>
-                <button id="game-over-leaderboard-btn" class="control-btn">Bestenliste</button>
+                <h2 id="game-over-title" style="color: var(--danger-color);">💥 <span data-i18n="gameOver">Game Over!</span></h2>
+                <p data-i18n="gameOverText">Du bist auf eine Mine getreten.</p>
+                <button id="game-over-btn" class="control-btn" data-i18n="restart">Neu starten</button>
+                <button id="game-over-leaderboard-btn" class="control-btn" data-i18n="Leaderboard">Bestenliste</button>
             </div>
         </div>
 
-        <div id="game-win" class="popup">
+        <div id="game-win" class="popup" role="dialog" aria-labelledby="game-win-title">
             <div class="popup-content" style="text-align: center;">
-                <h2 style="color: var(--success-color);">🎉 Glückwunsch!</h2>
-                <p>Du hast alle Minen erfolgreich umgangen!</p>
-                <button id="game-win-btn" class="control-btn">Neu starten</button>
-                <button id="game-win-leaderboard-btn" class="control-btn">Bestenliste</button>
+                <h2 id="game-win-title" style="color: var(--success-color);">🎉 <span data-i18n="congratulations">Glückwunsch!</span></h2>
+                <p data-i18n="winText">Du hast alle Minen erfolgreich umgangen!</p>
+                <button id="game-win-btn" class="control-btn" data-i18n="restart">Neu starten</button>
+                <button id="game-win-leaderboard-btn" class="control-btn" data-i18n="Leaderboard">Bestenliste</button>
             </div>
         </div>
 
-        <div id="game-win-nameInp" class="popup">
+        <div id="game-win-nameInp" class="popup" role="dialog" aria-labelledby="name-input-title">
             <div class="popup-content" style="text-align: center;">
-                <h2 style="color: var(--success-color);">🎉 Du hast gewonnen!</h2>
-                <p>Bitte gib deinen Namen ein:</p>
-                <input type="text" id="nameInp" placeholder="Dein Name" style="width: 100%; padding: 10px; margin: 10px 0; background: var(--accent-color); border: none; border-radius: 5px; color: white;">
-                <button id="save-nameInp-btn" class="control-btn">Speichern</button>
+                <h2 id="name-input-title" style="color: var(--success-color);">🎉 <span data-i18n="youWon">Du hast gewonnen!</span></h2>
+                <p data-i18n="enterName">Bitte gib deinen Namen ein:</p>
+                <input type="text" id="nameInp" data-i18n-placeholder="yourName" placeholder="Dein Name" style="width: 100%; padding: 10px; margin: 10px 0; background: var(--accent-color); border: none; border-radius: 5px; color: white;" aria-label="Your Name">
+                <button id="save-nameInp-btn" class="control-btn" data-i18n="save">Speichern</button>
             </div>
         </div>
 
-        <!-- <div id="arcade-view" style="display: none;">
-            <div id="arcade-menu">
-                <h2>🎮 Wähle ein Spiel</h2>
-                <button class="game-select" data-game="pong">🏓 Pong</button>
-                <button class="game-select" data-game="snake">🐍 Snake</button>
-                <button class="game-select" data-game="invaders">👾 Space Invaders</button>
-                <button id="exit-arcade" style="margin-top: 2rem">⬅ Zurück</button>
-            </div>
-            <canvas id="pong-canvas" width="800" height="500" style="display: none"></canvas>
-        </div> -->
-
-        <div id="arcade-view" class="popup">
+        <div id="arcade-view" class="popup" role="dialog" aria-labelledby="arcade-title">
             <div id="arcade-menu" class="popup-content">
-                <h2>🎮 Wähle ein Spiel</h2>
-                <!-- <button class="game-select" data-game="pong">🏓 Pong</button>
-                <button class="game-select" data-game="snake">🐍 Snake</button>
-                <button class="game-select" data-game="invaders">👾 Space Invaders</button>
-                <button id="exit-arcade" style="margin-top: 2rem">⬅ Zurück</button> -->
-                <button class="control-btn" data-game="pong">🏓 Pong</button>
-                <button class="control-btn" data-game="snake">🐍 Snake</button>
-                <button class="control-btn" data-game="invaders">👾 Space Invaders</button>
-                <button id="exit-arcade" class="control-btn">Schließen</button>
+                <h2 id="arcade-title">🎮 <span data-i18n="selectGame">Wähle ein Spiel</span></h2>
+                <button class="control-btn" data-game="pong" aria-label="Play Pong">🏓 <span data-i18n="pong">Pong</span></button>
+                <button class="control-btn" data-game="snake" aria-label="Play Snake">🐍 <span data-i18n="snake">Snake</span></button>
+                <button class="control-btn" data-game="invaders" aria-label="Play Space Invaders">👾 <span data-i18n="spaceInvaders">Space Invaders</span></button>
+                <button id="exit-arcade" class="control-btn" data-i18n="close">Schließen</button>
             </div>
             <canvas id="pong-canvas" width="800" height="500" style="display: none"></canvas>
         </div>
